@@ -2,15 +2,15 @@
 <plugin
     xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.megster.cordova.bluetoothserial"
+    id="com.tomvanenckevort.cordova.bluetoothserial"
     version="0.2.2">
 
     <name>Bluetooth Serial</name>
-    <description>Bluetooth Serial Communication Plugin</description>
+    <description>Bluetooth Serial Communication Plugin (forked from Don Coleman's original)</description>
     <license>Apache 2.0</license>
     <keywords>bluetooth, arduino</keywords>
-    <repo>https://github.com/don/BluetoothSerial.git</repo>
-    <issue>https://github.com/don/BluetoothSerial/issues</issue>
+    <repo>https://github.com/tomvanenckevort/BluetoothSerial.git</repo>
+    <issue>https://github.com/tomvanenckevort/BluetoothSerial/issues</issue>
 
     <engines>
         <engine name="cordova" version=">=2.9.0" />
