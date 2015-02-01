@@ -43,6 +43,9 @@ public class BluetoothSerialService {
     // Member fields
     private final BluetoothAdapter mAdapter;
     private final Handler mHandler;
+    /**
+     * TODO: Create maps of handlers for multiple connection management.
+     */
     private AcceptThread mSecureAcceptThread;
     private AcceptThread mInsecureAcceptThread;
     private ConnectThread mConnectThread;
@@ -260,7 +263,16 @@ public class BluetoothSerialService {
             // Create a new listening server socket
             try {
                 if (secure) {
-                    tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE, MY_UUID_SECURE);
+//                    tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE, MY_UUID_SECURE);
+                    Method m = device.getClass().getMethod("listenRfcommSocket",
+                                    new Class[] { int.class });
+                    tmp = (BluetoothSocket) m.invoke(device, 1);
+//                    m = BluetoothDevice.class.getMethod("convertPinToBytes",
+//                                    new Class[] { String.class });
+//                    byte[] pin = (byte[]) m.invoke(device, "1234");
+//                    m = device.getClass().getMethod("setPin",
+//                                    new Class[] { pin.getClass() });
+//                    m.invoke(device, pin);
                 } else {
                     tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(NAME_INSECURE, MY_UUID_INSECURE);
                 }
@@ -344,7 +356,17 @@ public class BluetoothSerialService {
             try {
                 if (secure) {
                     // tmp = device.createRfcommSocketToServiceRecord(MY_UUID_SECURE);
-                    tmp = device.createRfcommSocketToServiceRecord(MY_UUID_SECURE);
+//                    tmp = device.createRfcommSocketToServiceRecord(MY_UUID_SECURE);
+                    
+                    Method m = device.getClass().getMethod("createRfcommSocket",
+                                    new Class[] { int.class });
+                    tmp = (BluetoothSocket) m.invoke(device, 1);
+                    m = BluetoothDevice.class.getMethod("convertPinToBytes",
+                                    new Class[] { String.class });
+                    byte[] pin = (byte[]) m.invoke(device, "1234");
+                    m = device.getClass().getMethod("setPin",
+                                    new Class[] { pin.getClass() });
+                    m.invoke(device, pin);
                 } else {
                     //tmp = device.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
                     tmp = device.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
